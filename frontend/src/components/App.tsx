@@ -3,7 +3,13 @@ import Navigation from './Navigation/Navigation'
 import 'styles.css'
 
 function App() {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false
+      }
+    }
+  })
 
   return (
     <QueryClientProvider client={queryClient}>
