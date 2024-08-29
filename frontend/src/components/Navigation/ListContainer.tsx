@@ -4,9 +4,13 @@ import { useQuery } from '@tanstack/react-query'
 import { getStudioList } from 'api/studios'
 import Loading from 'components/Other/Loading'
 import ErrorInfo from 'components/Other/ErrorInfo'
+import { useState } from 'react'
 
 const ListContainer = () => {
   const query = useQuery({ queryKey: ['studios'], queryFn: getStudioList })
+  const [search, setSearch] = useState<string>('')
+
+  // Rendering statements
 
   if (query.isLoading) {
     return (
@@ -25,8 +29,8 @@ const ListContainer = () => {
 
   return (
     <div className="text-secondary my-8 space-y-8">
-      <SearchComponent className="w-5/6 mx-auto" />
-      <StudioList studioList={query.data} />
+      <SearchComponent className="w-5/6 mx-auto" setSearch={setSearch} />
+      <StudioList studioList={query.data} search={search} />
     </div>
   )
 }
