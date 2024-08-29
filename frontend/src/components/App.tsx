@@ -13,7 +13,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-primary text-secondary p-8">
+      <div className="min-h-screen bg-primary text-secondary px-4">
         <Navigation />
         {/* <Main /> */}
       </div>

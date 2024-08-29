@@ -1,3 +1,4 @@
+import LetterSelect from './LetterSelect'
 import Studio from './Studio'
 
 type StudioListProps = {
@@ -18,23 +19,29 @@ const StudioList = ({ studioList, search }: StudioListProps) => {
 
   if (search.trim() === '') {
     return (
-      <div className=" max-h-[70vh] overflow-y-auto">
-        {Object.keys(studioList).map((letter) => (
-          <Studio key={letter} letter={letter} studios={studioList[letter]} />
-        ))}
+      <div>
+        <div className=" max-h-[70vh] overflow-y-auto scroll-smooth ">
+          {Object.keys(studioList).map((letter) => (
+            <Studio key={letter} letter={letter} studios={studioList[letter]} />
+          ))}
+        </div>
+        <LetterSelect />
       </div>
     )
   }
 
   return (
-    <div className=" max-h-[70vh] overflow-y-auto">
-      {Object.keys(filteredStudios).map((letter) => (
-        <Studio
-          key={letter}
-          letter={letter}
-          studios={filteredStudios[letter]}
-        />
-      ))}
+    <div>
+      <div className=" max-h-[70vh] overflow-y-auto scroll-smooth">
+        {Object.keys(filteredStudios).map((letter) => (
+          <Studio
+            key={letter}
+            letter={letter}
+            studios={filteredStudios[letter]}
+          />
+        ))}
+      </div>
+      <LetterSelect />
     </div>
   )
 }
