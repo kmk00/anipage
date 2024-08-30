@@ -37,6 +37,7 @@ export const getStudiosDistinct = async () => {
 
 export const getProductionsByStudio = async (studio) => {
   return await Studio.findAll({
+    attributes: ["anime_id"],
     where: {
       Studios: {
         [Op.like]: `%${studio}%`,
