@@ -27,3 +27,8 @@
 body {
   scroll-behavior: smooth;
 }
+
+.character-image {
+  transform: scaleX(-1);
+  filter: brightness(70%);
+}

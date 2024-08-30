@@ -1,6 +1,19 @@
 import { useParams } from 'react-router-dom'
 
-const MainContent = () => {
+const MainContent = ({ text }: { text?: string }) => {
+  if (text) {
+    return (
+      <div className="w-full lg:flex hidden flex-col justify-center items-center ">
+        <h2 className="text-2xl p-4">{text}</h2>
+        <img
+          src="/src/assets/character-image.png"
+          alt="character pointing toward the studio list"
+          className="character-image w-1/2 mr-auto"
+        />
+      </div>
+    )
+  }
+
   const { studio } = useParams()
 
   return (
