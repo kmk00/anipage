@@ -62,5 +62,6 @@ export const getProductionsByStudio = async (studio) => {
         [Op.like]: `%${studio}%`,
       },
     },
+    order: [["Name", "ASC"]],
   });
 };

@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query'
+import { getProductionsByStudio } from 'api/studios'
 import { Link, useParams } from 'react-router-dom'
 
 const MainContent = ({ text }: { text?: string }) => {
@@ -14,30 +16,12 @@ const MainContent = ({ text }: { text?: string }) => {
     )
   }
 
-  const studioImages = [
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg'
-  ]
-
   const { studio } = useParams()
+
+  const query = useQuery({
+    queryKey: ['productions', studio],
+    queryFn: () => getProductionsByStudio(studio as string)
+  })
 
   return (
     <div className="w-full">
@@ -45,17 +29,17 @@ const MainContent = ({ text }: { text?: string }) => {
         Anime made by studio <span className="text-accent">{studio}</span>
       </h2>
 
-      <div className="p-8 grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))] gap-4">
-        {studioImages.map((image) => (
-          <Link key={image} to={`/anime/${image}`}>
-            <img
-              key={image}
-              src={image}
-              alt="studio"
-              className="mx-auto h-full rounded-md object-cover shadow-lg  hover:shadow-secondary hover:scale-[1.01] transition-all duration-50 ease-in-out"
-            />
-          </Link>
-        ))}
+      <div className="p-8 grid grid-cols-[repeat(auto-fill,_minmax(200px,1fr))] gap-4">
+        {query.data &&
+          query.data.map((item: Production, index: number) => (
+            <Link key={index} to={`/anime/${item.Name}`}>
+              <img
+                src={item.Image_URL}
+                alt="studio"
+                className="mx-auto h-full rounded-md object-cover shadow-lg  hover:shadow-secondary hover:scale-[1.01] transition-all duration-50 ease-in-out"
+              />
+            </Link>
+          ))}
       </div>
     </div>
   )
