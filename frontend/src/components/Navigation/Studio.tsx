@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const Studio = ({ letter, studios }: { letter: string; studios: string[] }) => {
   return (
     <div>
@@ -7,9 +9,13 @@ const Studio = ({ letter, studios }: { letter: string; studios: string[] }) => {
       <hr className="border-b-2 border-primaryLight" />
       <div className="space-y-1 pl-8 flex flex-col items-start gap-2 py-4">
         {studios.map((studio) => (
-          <button key={studio} className="ml-4 py-1 cursor-pointer">
+          <Link
+            key={studio}
+            to={`/${studio}`}
+            className="ml-4 py-1 cursor-pointer"
+          >
             {studio}
-          </button>
+          </Link>
         ))}
       </div>
     </div>
