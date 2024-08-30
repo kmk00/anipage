@@ -14,6 +14,14 @@ export const Studio = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+
+    Name: {
+      type: DataTypes.TEXT,
+    },
+
+    Englsh_name: {
+      type: DataTypes.TEXT,
+    },
   },
   {
     timestamps: false,
@@ -35,9 +43,17 @@ export const getStudiosDistinct = async () => {
   });
 };
 
+/**
+ * Gets all productions by a studio from the database.
+ *
+ * @param {string} studio Name of the studio to search for.
+ *
+ * @returns {Promise<Studio[]>} Promise that resolves to an array of studio objects
+ *   with only the "anime_id" attribute.
+ */
 export const getProductionsByStudio = async (studio) => {
   return await Studio.findAll({
-    attributes: ["anime_id"],
+    attributes: ["anime_id", "Name", "English_name"],
     where: {
       Studios: {
         [Op.like]: `%${studio}%`,
