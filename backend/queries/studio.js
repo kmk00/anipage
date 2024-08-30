@@ -22,6 +22,9 @@ export const Studio = sequelize.define(
     Englsh_name: {
       type: DataTypes.TEXT,
     },
+    Image_URL: {
+      type: DataTypes.TEXT,
+    },
   },
   {
     timestamps: false,
@@ -53,7 +56,7 @@ export const getStudiosDistinct = async () => {
  */
 export const getProductionsByStudio = async (studio) => {
   return await Studio.findAll({
-    attributes: ["anime_id", "Name", "English_name"],
+    attributes: ["anime_id", "Name", "English_name", "Image_URL"],
     where: {
       Studios: {
         [Op.like]: `%${studio}%`,
