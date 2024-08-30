@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Op } from "sequelize";
 import sequelize from "./sequelize.js";
 
 export const Studio = sequelize.define(
@@ -32,5 +32,15 @@ export const getStudiosDistinct = async () => {
     attributes: [
       [sequelize.fn("DISTINCT", sequelize.col("Studios")), "Studios"],
     ],
+  });
+};
+
+export const getProductionsByStudio = async (studio) => {
+  return await Studio.findAll({
+    where: {
+      Studios: {
+        [Op.like]: `%${studio}%`,
+      },
+    },
   });
 };
