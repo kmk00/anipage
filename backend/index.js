@@ -1,8 +1,11 @@
 import express from "express";
 import studiosRouter from "./routes/studios.js";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 app.get("/", async (req, res) => {
   return res.json({ hello: "world" });
