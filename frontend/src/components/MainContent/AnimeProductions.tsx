@@ -30,7 +30,9 @@ const AnimeProductions = ({ productions }: AnimeProductionProps) => {
               src={item.Image_URL}
               fallback="/src/assets/image-not-found.png"
               alt={item.Name}
-              className="mx-auto h-full rounded-md object-cover shadow-lg  hover:shadow-secondary hover:scale-[1.01] transition-all duration-50 ease-in-out"
+              nameEN={item.English_name}
+              name={item.Name}
+              className="mx-auto h-full rounded-md object-cover"
             />
           </Link>
         ))}
