@@ -6,7 +6,7 @@ const PageNotFound = ({ error }: { error?: string }) => {
     <div className="bg-primary text-secondary flex flex-col justify-center items-center h-screen">
       <ErrorInfo text={error || 'Page not found'} />
       <Link
-        className="mt-4 text-xl transition-all duration-300 ease-in hover:text-accent "
+        className="mt-4 underline underline-offset-4 text-xl transition-all duration-300 ease-in hover:text-accent "
         to="/"
       >
         Back to Home
