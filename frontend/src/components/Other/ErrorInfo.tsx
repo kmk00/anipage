@@ -2,7 +2,7 @@ const ErrorInfo = ({
   className,
   text
 }: {
-  className: string
+  className?: string
   text: string
 }) => {
   return (

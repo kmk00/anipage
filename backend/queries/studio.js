@@ -65,3 +65,24 @@ export const getProductionsByStudio = async (studio) => {
     order: [["Name", "ASC"]],
   });
 };
+
+/**
+ * Checks if a studio exists in the database.
+ *
+ * @param {string} studio Name of the studio to search for.
+ *
+ * @returns {Promise<Studio | null>} Promise that resolves to the studio if it exists,
+ *   or null if it doesn't.
+ */
+export const checkIfStudioExists = async (studio) => {
+  const studioExists = await Studio.findOne({
+    attributes: ["anime_id"],
+    where: {
+      Studios: {
+        [Op.like]: `%${studio}%`,
+      },
+    },
+  });
+
+  return studioExists;
+};

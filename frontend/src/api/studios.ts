@@ -12,7 +12,15 @@ export const getProductionsByStudio = async (studioName: string) => {
     const productions = await fetch(
       `http://localhost:3000/studios/${studioName}`
     )
-    return await productions.json()
+
+    const response = await productions.json()
+
+    if (!productions.ok) {
+      console.log(response)
+      throw new Error('Failed to fetch productions')
+    }
+
+    return response
   } catch (error) {
     throw new Error('Failed to fetch productions')
   }

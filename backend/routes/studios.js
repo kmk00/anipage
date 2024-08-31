@@ -1,6 +1,7 @@
 import express from "express";
 import groupByLetter from "../utils/groupByLetter.js";
 import {
+  checkIfStudioExists,
   getProductionsByStudio,
   getStudiosDistinct,
 } from "../queries/studio.js";
@@ -22,11 +23,16 @@ studiosRouter.get("/", async (req, res) => {
 studiosRouter.get("/:studioName", async (req, res) => {
   const studioName = req.params.studioName;
 
+  const studioExists = await checkIfStudioExists(studioName);
+  if (!studioExists) {
+    console.log("Studio not found");
+    return res.status(400).json({ error: "Studio not found" });
+  }
+
   const productions = await getProductionsByStudio(studioName);
-  console.log(productions);
 
   if (productions.length === 0) {
-    return res.status(404).json({ error: "Studio not found" });
+    return res.status(400);
   }
 
   return res.json(productions);
