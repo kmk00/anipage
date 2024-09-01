@@ -6,6 +6,7 @@ import MainContent from './MainContent/MainContent'
 import MainContentWrapper from './MainContent/MainContentWrapper'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import PageNotFound from './Other/PageNotFound'
+import AnimeDetails from './MainContent/AnimeDetails'
 
 function App() {
   const queryClient = new QueryClient({
@@ -23,6 +24,15 @@ function App() {
         <MainContentWrapper>
           <Navigation />
           <MainContent text="Select a studio" />
+        </MainContentWrapper>
+      )
+    },
+    {
+      path: '/anime/:animeId',
+      element: (
+        <MainContentWrapper>
+          <Navigation />
+          <AnimeDetails />
         </MainContentWrapper>
       )
     },

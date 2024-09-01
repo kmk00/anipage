@@ -25,7 +25,7 @@ const AnimeProductions = ({ productions }: AnimeProductionProps) => {
       <SearchComponent className="w-5/6 mx-auto" setSearch={setSearch} />
       <div className="p-8 grid grid-cols-[repeat(auto-fill,_minmax(200px,1fr))] gap-4">
         {filteredProductions.map((item: Production, index: number) => (
-          <Link key={index} to={`/anime/${item.Name}`}>
+          <Link key={index} to={`/anime/${item.anime_id}`}>
             <ImageWithFallback
               src={item.Image_URL}
               fallback="/src/assets/image-not-found.png"
