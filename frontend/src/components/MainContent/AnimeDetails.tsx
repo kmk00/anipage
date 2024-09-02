@@ -5,6 +5,7 @@ import Loading from 'components/Other/Loading'
 import PageNotFound from 'components/Other/PageNotFound'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import ProductionGenresList from './ProductionGenresList'
+import ImageWithFallback from 'components/Other/ImageWithFallback'
 
 const AnimeDetails = () => {
   const { animeId } = useParams()
@@ -49,32 +50,34 @@ const AnimeDetails = () => {
         {data?.Name} / {data?.Other_name}
       </h3>
 
-      <div className="flex flex-wrap mt-4 gap-4">
+      <div className="flex flex-wrap mt-4 gap-2">
         <div className="basis-[300px] mx-auto">
-          <img
+          <ImageWithFallback
             src={data?.Image_URL}
+            detail
+            fallback="/src/assets/image-not-found.png"
             alt={data?.Name}
-            className="w-full rounded-t-md object-cover"
+            nameEN={data?.English_name}
+            name={data?.Name}
+            className="mx-auto h-full rounded-md object-cover"
           />
-          <div className="bg-primaryLight px-2 flex rounded-b-md font-bold justify-around">
+          <div className="bg-primaryLight px-2 grid grid-cols-3 mt-4 rounded-md font-bold justify-around">
             <div className="flex p-1 flex-col justify-center text-center">
-              <p className="text-2xl">{data?.Score}</p>
-              <p className="text-sm">Score</p>
+              <p className="text-md">{data?.Score || 'Unknown'}</p>
+              <p className="text-[12px]">Score</p>
             </div>
             <div className="flex p-1 bg-primary flex-col justify-center text-center">
-              <p className="text-2xl">{data?.Source}</p>
-              <p className="text-sm">Source</p>
+              <p className="text-md">{data?.Source || 'Unknown'}</p>
+              <p className="text-[12px]">Source</p>
             </div>
             <div className="flex p-1 flex-col justify-center text-center">
-              <p className="text-2xl">{data?.Type}</p>
-              <p className="text-sm">Type</p>
+              <p className="text-md ">{data?.Type || 'Unknown'}</p>
+              <p className="text-[12px] ">Type</p>
             </div>
           </div>
-          <div className="">
-            <ProductionGenresList genres={data?.Genres} />
-          </div>
+          <ProductionGenresList genres={data?.Genres} />
         </div>
-        <div className="basis-[400px] space-y-4 grow">
+        <div className="basis-[400px] md:mt-0 space-y-4 grow">
           <h3 className="text-2xl font-bold">Synopsis</h3>
           <p className="ml-2 tracking-wide leading-7 font-semibold">
             {data?.Synopsis}

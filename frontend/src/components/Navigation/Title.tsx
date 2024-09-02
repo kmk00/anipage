@@ -1,5 +1,11 @@
+import { Link } from 'react-router-dom'
+
 const Title = ({ text }: { text: string }) => {
-  return <p className="text-3xl py-4  text-accent font-medium">{text}</p>
+  return (
+    <Link to="/" className="text-3xl text-accent font-medium">
+      {text}
+    </Link>
+  )
 }
 
 export default Title

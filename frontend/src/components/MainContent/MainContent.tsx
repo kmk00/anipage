@@ -42,7 +42,7 @@ const MainContent = ({ text }: { text?: string }) => {
 
   return (
     <div className="w-full">
-      <h2 className="text-xl p-4">
+      <h2 className="text-xl text-center md:text-left p-4">
         Anime made by studio <span className="text-accent">{studio}</span>
       </h2>
 
