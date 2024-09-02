@@ -3,7 +3,7 @@ import { getAnimeById } from 'api/anime'
 import ErrorInfo from 'components/Other/ErrorInfo'
 import Loading from 'components/Other/Loading'
 import PageNotFound from 'components/Other/PageNotFound'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ProductionGenresList from './ProductionGenresList'
 import ImageWithFallback from 'components/Other/ImageWithFallback'
 
@@ -86,23 +86,27 @@ const AnimeDetails = () => {
           <div className="flex flex-col gap-y-2 font-semibold ml-2">
             <div className="flex gap-2 justify-between">
               <p>Episodes:</p>
-              <p>{data?.Episodes ? Number(data.Episodes) : 'Unknown'}</p>
+              <p>
+                {data.Episodes && !isNaN(data.Episodes)
+                  ? Number(data.Episodes)
+                  : 'Unknown'}
+              </p>
             </div>
             <div className="flex bg-primaryLight gap-2 justify-between">
               <p>Aired:</p>
-              <p>{data?.Aired}</p>
+              <p>{data.Aired}</p>
             </div>
             <div className="flex gap-2 justify-between">
               <p>Status:</p>
-              <p>{data?.Status}</p>
+              <p>{data.Status}</p>
             </div>
             <div className="flex bg-primaryLight gap-2 justify-between">
               <p>Rating:</p>
-              <p>{data?.Rating}</p>
+              <p>{data.Rating}</p>
             </div>
             <div className="flex gap-2 justify-between">
               <p>Studios:</p>
-              <p>{data?.Studios}</p>
+              <p>{data.Studios}</p>
             </div>
           </div>
           <button
