@@ -31,7 +31,6 @@ function App() {
       path: '/anime/:animeId',
       element: (
         <MainContentWrapper>
-          <Navigation />
           <AnimeDetails />
         </MainContentWrapper>
       )

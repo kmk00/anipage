@@ -44,7 +44,7 @@ const AnimeDetails = () => {
   if (!data) return <PageNotFound />
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full max-w-[1200px] mx-auto p-4">
       <h2 className="text-2xl">{data?.English_name}</h2>
       <h3 className="text-lg italic">
         {data?.Name} / {data?.Other_name}
