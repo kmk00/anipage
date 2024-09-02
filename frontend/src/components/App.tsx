@@ -7,6 +7,7 @@ import MainContentWrapper from './MainContent/MainContentWrapper'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import PageNotFound from './Other/PageNotFound'
 import AnimeDetails from './MainContent/AnimeDetails'
+import RankingsContainer from './RankingsContent/RankingsContainer'
 
 function App() {
   const queryClient = new QueryClient({
@@ -24,6 +25,14 @@ function App() {
         <MainContentWrapper>
           <Navigation />
           <MainContent text="Select a studio" />
+        </MainContentWrapper>
+      )
+    },
+    {
+      path: '/rankings',
+      element: (
+        <MainContentWrapper>
+          <RankingsContainer />
         </MainContentWrapper>
       )
     },

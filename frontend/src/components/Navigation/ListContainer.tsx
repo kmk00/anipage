@@ -28,7 +28,7 @@ const ListContainer = () => {
   }
 
   return (
-    <div className="text-secondary my-8 space-y-8">
+    <div className="text-secondary my-8 space-y-8 mb-0">
       <SearchComponent className="w-5/6 mx-auto" setSearch={setSearch} />
       <StudioList studioList={query.data} search={search} />
     </div>
