@@ -1,6 +1,32 @@
+import { useQuery } from '@tanstack/react-query'
+import { getProductionsByStudio } from 'api/studios'
+import ErrorInfo from 'components/Other/ErrorInfo'
+import ImageWithFallback from 'components/Other/ImageWithFallback'
+import Loading from 'components/Other/Loading'
 import { Link, useParams } from 'react-router-dom'
+import AnimeProductions from './AnimeProductions'
 
 const MainContent = ({ text }: { text?: string }) => {
+  const { studio } = useParams()
+
+  const query = useQuery({
+    queryKey: ['productions', studio],
+    queryFn: () => getProductionsByStudio(studio as string),
+    enabled: !!studio
+  })
+
+  if (query.isError) {
+    return (
+      <div className="w-full flex justify-center items-center ">
+        <ErrorInfo
+          className="text-secondary w-1/2"
+          text={query.error?.message || 'Something went wrong'}
+        />
+      </div>
+    )
+  }
+
+  // Display when the studio is not selected
   if (text) {
     return (
       <div className="w-full lg:flex hidden flex-col justify-center items-center ">
@@ -14,49 +40,17 @@ const MainContent = ({ text }: { text?: string }) => {
     )
   }
 
-  const studioImages = [
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
-    'https://cdn.myanimelist.net/images/anime/4/19644.jpg',
-    'https://cdn.myanimelist.net/images/anime/1439/93480.jpg',
-    'https://cdn.myanimelist.net/images/anime/10/19969.jpg',
-    'https://cdn.myanimelist.net/images/anime/7/21569.jpg'
-  ]
-
-  const { studio } = useParams()
-
   return (
     <div className="w-full">
-      <h2 className="text-xl p-4">
+      <h2 className="text-xl text-center md:text-left p-4">
         Anime made by studio <span className="text-accent">{studio}</span>
       </h2>
 
-      <div className="p-8 grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))] gap-4">
-        {studioImages.map((image) => (
-          <Link key={image} to={`/anime/${image}`}>
-            <img
-              key={image}
-              src={image}
-              alt="studio"
-              className="mx-auto h-full rounded-md object-cover shadow-lg  hover:shadow-secondary hover:scale-[1.01] transition-all duration-50 ease-in-out"
-            />
-          </Link>
-        ))}
-      </div>
+      {query.isLoading && (
+        <Loading className="h-[70vh]" text="Loading productions..." />
+      )}
+
+      {query.data && <AnimeProductions productions={query.data} />}
     </div>
   )
 }

@@ -5,7 +5,6 @@ import { getStudioList } from 'api/studios'
 import Loading from 'components/Other/Loading'
 import ErrorInfo from 'components/Other/ErrorInfo'
 import { useState } from 'react'
-import LetterSelect from './LetterSelect'
 
 const ListContainer = () => {
   const query = useQuery({ queryKey: ['studios'], queryFn: getStudioList })

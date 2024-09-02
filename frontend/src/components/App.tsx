@@ -4,6 +4,9 @@ import 'styles.css'
 import { createBrowserRouter, Route, RouterProvider } from 'react-router-dom'
 import MainContent from './MainContent/MainContent'
 import MainContentWrapper from './MainContent/MainContentWrapper'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import PageNotFound from './Other/PageNotFound'
+import AnimeDetails from './MainContent/AnimeDetails'
 
 function App() {
   const queryClient = new QueryClient({
@@ -25,6 +28,14 @@ function App() {
       )
     },
     {
+      path: '/anime/:animeId',
+      element: (
+        <MainContentWrapper>
+          <AnimeDetails />
+        </MainContentWrapper>
+      )
+    },
+    {
       path: '/:studio',
       element: (
         <MainContentWrapper>
@@ -35,13 +46,14 @@ function App() {
     },
     {
       path: '*',
-      element: <div>404</div>
+      element: <PageNotFound />
     }
   ])
 
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

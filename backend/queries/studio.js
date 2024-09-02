@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Op } from "sequelize";
 import sequelize from "./sequelize.js";
 
 export const Studio = sequelize.define(
@@ -13,6 +13,17 @@ export const Studio = sequelize.define(
     Studios: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+
+    Name: {
+      type: DataTypes.TEXT,
+    },
+
+    Englsh_name: {
+      type: DataTypes.TEXT,
+    },
+    Image_URL: {
+      type: DataTypes.TEXT,
     },
   },
   {
@@ -33,4 +44,45 @@ export const getStudiosDistinct = async () => {
       [sequelize.fn("DISTINCT", sequelize.col("Studios")), "Studios"],
     ],
   });
+};
+
+/**
+ * Gets all productions by a studio from the database.
+ *
+ * @param {string} studio Name of the studio to search for.
+ *
+ * @returns {Promise<Studio[]>} Promise that resolves to an array of studio objects
+ *   with only the "anime_id" attribute.
+ */
+export const getProductionsByStudio = async (studio) => {
+  return await Studio.findAll({
+    attributes: ["anime_id", "Name", "English_name", "Image_URL"],
+    where: {
+      Studios: {
+        [Op.like]: `%${studio}%`,
+      },
+    },
+    order: [["Name", "ASC"]],
+  });
+};
+
+/**
+ * Checks if a studio exists in the database.
+ *
+ * @param {string} studio Name of the studio to search for.
+ *
+ * @returns {Promise<Studio | null>} Promise that resolves to the studio if it exists,
+ *   or null if it doesn't.
+ */
+export const checkIfStudioExists = async (studio) => {
+  const studioExists = await Studio.findOne({
+    attributes: ["anime_id"],
+    where: {
+      Studios: {
+        [Op.like]: `%${studio}%`,
+      },
+    },
+  });
+
+  return studioExists;
 };

@@ -1,5 +1,6 @@
 import express from "express";
 import studiosRouter from "./routes/studios.js";
+import animeRouter from "./routes/anime.js";
 import cors from "cors";
 
 const app = express();
@@ -12,6 +13,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/studios", studiosRouter);
+app.use("/anime", animeRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
