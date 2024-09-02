@@ -23,7 +23,7 @@ const AnimeProductions = ({ productions }: AnimeProductionProps) => {
   return (
     <div>
       <SearchComponent className="w-5/6 mx-auto" setSearch={setSearch} />
-      <div className="p-8 grid mx-auto grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
+      <div className="p-8 grid mx-auto grid-cols-[repeat(auto-fill,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
         {filteredProductions.map((item: Production, index: number) => (
           <Link key={index} to={`/anime/${item.anime_id}`}>
             <ImageWithFallback

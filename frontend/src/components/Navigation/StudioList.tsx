@@ -10,7 +10,7 @@ const StudioList = ({ studioList, search }: StudioListProps) => {
   if (search.trim() === '') {
     return (
       <div>
-        <div className="max-h-[30vh] md:max-h-[70vh] overflow-y-auto scroll-smooth ">
+        <div className="max-h-[30vh] lg:max-h-[70vh] overflow-y-auto scroll-smooth ">
           {Object.keys(studioList).map((letter) => (
             <Studio key={letter} letter={letter} studios={studioList[letter]} />
           ))}
@@ -34,7 +34,7 @@ const StudioList = ({ studioList, search }: StudioListProps) => {
 
   return (
     <div>
-      <div className="max-h-[30vh] md:max-h-[70vh] overflow-y-auto scroll-smooth">
+      <div className="max-h-[30vh] lg:max-h-[70vh] overflow-y-auto scroll-smooth">
         {Object.keys(filteredStudios).map((letter) => (
           <Studio
             key={letter}
