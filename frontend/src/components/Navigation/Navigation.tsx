@@ -9,14 +9,15 @@ const Navigation = () => {
 
       <ListContainer />
 
-      <button className="mt-2">
+      {/* TODO: Add rankings  */}
+      {/* <button className="mt-2">
         <Link
           to="/rankings"
           className="text-xl bg-secondary hover:bg-accent transition-all duration-300 ease-in hover:text-primary rounded-lg px-6 py-1"
         >
           Rankings
         </Link>
-      </button>
+      </button> */}
     </div>
   )
 }

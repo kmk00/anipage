@@ -28,14 +28,15 @@ function App() {
         </MainContentWrapper>
       )
     },
-    {
-      path: '/rankings',
-      element: (
-        <MainContentWrapper>
-          <RankingsContainer />
-        </MainContentWrapper>
-      )
-    },
+    // TODO: Add rankings
+    // {
+    //   path: '/rankings',
+    //   element: (
+    //     <MainContentWrapper>
+    //       <RankingsContainer />
+    //     </MainContentWrapper>
+    //   )
+    // },
     {
       path: '/anime/:animeId',
       element: (

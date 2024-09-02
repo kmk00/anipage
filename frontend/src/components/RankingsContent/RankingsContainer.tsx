@@ -1,5 +1,5 @@
 const RankingsContainer = () => {
-  return <div>RankingsContainer</div>
+  return <div className="max-w-[1200px] mx-auto">RankingsContainer</div>
 }
 
 export default RankingsContainer
