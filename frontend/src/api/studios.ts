@@ -1,6 +1,11 @@
 export const getStudioList = async () => {
   try {
     const studios = await fetch('http://localhost:3000/studios')
+
+    if (!studios.ok) {
+      throw new Error('Failed to fetch studios')
+    }
+
     return await studios.json()
   } catch (error) {
     throw new Error('Failed to fetch studios')
